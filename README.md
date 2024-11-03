@@ -7,16 +7,16 @@
   <a href="#license"><img src=".github/images/license.svg"/></a>
 </p>
 
-<p align="center">
-  <a href="https://kaos.sh/g/imaging"><img src=".github/images/godoc.svg"/></a>
-  <a href="#license"><img src=".github/images/license.svg"/></a>
-</p>
+<p align="center"><a href="#image-processing">Image processing</a> • <a href="#faq">FAQ</a> • <a href="#usage-example">Usage example</a> • <a href="#license">License</a></p>
+
+<br/>
 
 Package `imaging` provides basic image processing functions (_resize, rotate, crop, brightness/contrast adjustments, etc._).
 
 All the image processing functions provided by the package accept any image type that implements `image.Image` interface as an input, and return a new image of `*image.NRGBA` type (_32bit RGBA colors, non-premultiplied alpha_).
 
-### Image resizing
+### Image processing
+#### Image resizing
 
 ```go
 // Resize srcImage to size = 128x128px using the Lanczos filter.
@@ -59,8 +59,7 @@ Filter                    | Resize result
 `imaging.CatmullRom`      | ![dstImage](testdata/out_resize_catrom.png)
 `imaging.Lanczos`         | ![dstImage](testdata/out_resize_lanczos.png)
 
-
-### Gaussian Blur
+#### Gaussian Blur
 
 ```go
 dstImage := imaging.Blur(srcImage, 0.5)
@@ -72,7 +71,7 @@ Original image | Sigma = 0.5 | Sigma = 1.5
 ---------------|------------ |------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_blur_0.5.png) | ![dstImage](testdata/out_blur_1.5.png)
 
-### Sharpening
+#### Sharpening
 
 ```go
 dstImage := imaging.Sharpen(srcImage, 0.5)
@@ -84,7 +83,7 @@ Original image | Sigma = 0.5 | Sigma = 1.5
 ---------------|-------------|------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_sharpen_0.5.png) | ![dstImage](testdata/out_sharpen_1.5.png)
 
-### Gamma correction
+#### Gamma correction
 
 ```go
 dstImage := imaging.AdjustGamma(srcImage, 0.75)
@@ -94,7 +93,7 @@ Original image | Gamma = 0.75 | Gamma = 1.25
 ---------------|--------------|-------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_gamma_0.75.png) | ![dstImage](testdata/out_gamma_1.25.png)
 
-### Contrast adjustment
+#### Contrast adjustment
 
 ```go
 dstImage := imaging.AdjustContrast(srcImage, 20)
@@ -104,7 +103,7 @@ Original image | Contrast = 15 | Contrast = -15
 ---------------|---------------|---------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_contrast_p15.png) | ![dstImage](testdata/out_contrast_m15.png)
 
-### Brightness adjustment
+#### Brightness adjustment
 
 ```go
 dstImage := imaging.AdjustBrightness(srcImage, 20)
@@ -114,7 +113,7 @@ Original image | Brightness = 10 | Brightness = -10
 ---------------|-----------------|-----------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_brightness_p10.png) | ![dstImage](testdata/out_brightness_m10.png)
 
-### Saturation adjustment
+#### Saturation adjustment
 
 ```go
 dstImage := imaging.AdjustSaturation(srcImage, 20)
@@ -124,7 +123,7 @@ Original image | Saturation = 30 | Saturation = -30
 ---------------|-----------------|-----------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_saturation_p30.png) | ![dstImage](testdata/out_saturation_m30.png)
 
-### Hue adjustment
+#### Hue adjustment
 
 ```go
 dstImage := imaging.AdjustHue(srcImage, 20)
