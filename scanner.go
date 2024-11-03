@@ -5,6 +5,8 @@ import (
 	"image/color"
 )
 
+const MAX_PALETTE = 256
+
 type scanner struct {
 	image   image.Image
 	w, h    int
@@ -18,8 +20,8 @@ func newScanner(img image.Image) *scanner {
 		h:     img.Bounds().Dy(),
 	}
 	if img, ok := img.(*image.Paletted); ok {
-		s.palette = make([]color.NRGBA, len(img.Palette))
-		for i := 0; i < len(img.Palette); i++ {
+		s.palette = make([]color.NRGBA, MAX_PALETTE)
+		for i := 0; i < len(img.Palette) && i < MAX_PALETTE; i++ {
 			s.palette[i] = color.NRGBAModel.Convert(img.Palette[i]).(color.NRGBA)
 		}
 	}
