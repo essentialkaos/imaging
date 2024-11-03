@@ -341,6 +341,53 @@ func Thumbnail(img image.Image, width, height int, filter ResampleFilter) *image
 	return Fill(img, width, height, Center, filter)
 }
 
+func nearestInts(input float64) []int {
+	n1 := int(input + 0.5)
+	res := []int{n1}
+	n2 := int(input)
+	if n2 != n1 {
+		res = append(res, n2)
+	}
+	return res
+}
+func scaledCoords(srcX, srcY float64) (newX, newY int) {
+	if srcX > srcY {
+		// invert and re-call here
+		newY, newX = scaledCoords(srcY, srcX)
+		return
+	}
+	ratioOrig := float64(srcX) / float64(srcY)
+	ratioDiff := math.Inf(+1)
+	for _, curX := range nearestInts(srcX) {
+		for _, curY := range nearestInts(srcY) {
+			ratioRes := math.Abs(float64(curX)/float64(curY) - ratioOrig)
+			if ratioRes < ratioDiff {
+				ratioDiff = ratioRes
+				newX = curX
+				newY = curY
+			}
+		}
+	}
+	return
+}
+
+// Scale scales the image using scale ratio and the specified resample filter
+//
+// Example:
+//
+//	dstImage := imaging.Scale(srcImage, 0.5, imaging.Lanczos)
+func Scale(img image.Image, ratio float64, filter ResampleFilter) *image.NRGBA {
+	if ratio <= 0 {
+		return &image.NRGBA{}
+	}
+	newX, newY := scaledCoords(
+		float64(img.Bounds().Size().X)*ratio,
+		float64(img.Bounds().Size().Y)*ratio)
+	return Resize(img, newX, newY, filter)
+}
+
+// ////////////////////////////////////////////////////////////////////////////////// //
+
 // ResampleFilter specifies a resampling filter to be used for image resizing.
 //
 //	General filter recommendations:
