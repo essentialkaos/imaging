@@ -1,26 +1,20 @@
-# Imaging
+<p align="center"><a href="#readme"><img src=".github/images/card.svg"/></a></p>
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/disintegration/imaging)](https://pkg.go.dev/github.com/disintegration/imaging)
-[![Build Status](https://travis-ci.org/disintegration/imaging.svg?branch=master)](https://travis-ci.org/disintegration/imaging)
-[![Coverage Status](https://coveralls.io/repos/github/disintegration/imaging/badge.svg?branch=master&service=github)](https://coveralls.io/github/disintegration/imaging?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/disintegration/imaging)](https://goreportcard.com/report/github.com/disintegration/imaging)
+<p align="center">
+  <a href="https://kaos.sh/g/imaging"><img src=".github/images/godoc.svg"/></a>
+  <a href="https://kaos.sh/w/imaging/ci"><img src="https://kaos.sh/w/imaging/ci.svg" alt="GitHub Actions CI Status" /></a>
+  <a href="https://kaos.sh/w/imaging/codeql"><img src="https://kaos.sh/w/imaging/codeql.svg" alt="GitHub Actions CodeQL Status" /></a>
+  <a href="#license"><img src=".github/images/license.svg"/></a>
+</p>
 
-Package imaging provides basic image processing functions (resize, rotate, crop, brightness/contrast adjustments, etc.).
+<p align="center">
+  <a href="https://kaos.sh/g/imaging"><img src=".github/images/godoc.svg"/></a>
+  <a href="#license"><img src=".github/images/license.svg"/></a>
+</p>
 
-All the image processing functions provided by the package accept any image type that implements `image.Image` interface
-as an input, and return a new image of `*image.NRGBA` type (32bit RGBA colors, non-premultiplied alpha).
+Package `imaging` provides basic image processing functions (_resize, rotate, crop, brightness/contrast adjustments, etc._).
 
-## Installation
-
-    go get -u github.com/disintegration/imaging
-
-## Documentation
-
-https://pkg.go.dev/github.com/disintegration/imaging
-
-## Usage examples
-
-A few usage examples can be found below. See the documentation for the full list of supported functions.
+All the image processing functions provided by the package accept any image type that implements `image.Image` interface as an input, and return a new image of `*image.NRGBA` type (_32bit RGBA colors, non-premultiplied alpha_).
 
 ### Image resizing
 
@@ -46,7 +40,9 @@ Imaging supports image resizing using various resampling filters. The most notab
 - `Box` - Simple and fast averaging filter appropriate for downscaling. When upscaling it's similar to NearestNeighbor.
 - `NearestNeighbor` - Fastest resampling filter, no antialiasing.
 
-The full list of supported filters:  NearestNeighbor, Box, Linear, Hermite, MitchellNetravali, CatmullRom, BSpline, Gaussian, Lanczos, Hann, Hamming, Blackman, Bartlett, Welch, Cosine. Custom filters can be created using ResampleFilter struct.
+The full list of supported filters: `NearestNeighbor`, `Box`, `Linear`, `Hermite`, `MitchellNetravali`, `CatmullRom`, `BSpline`, `Gaussian`, `Lanczos`, `Hann`, `Hamming`, `Blackman`, `Bartlett`, `Welch`, `Cosine`.
+
+Custom filters can be created using ResampleFilter struct.
 
 **Resampling filters comparison**
 
@@ -54,8 +50,7 @@ Original image:
 
 ![srcImage](testdata/branches.png)
 
-The same image resized from 600x400px to 150x100px using different resampling filters.
-From faster (lower quality) to slower (higher quality):
+The same image resized from 600x400px to 150x100px using different resampling filters. From faster (_lower quality_) to slower (_higher quality_):
 
 Filter                    | Resize result
 --------------------------|---------------------------------------------
@@ -73,8 +68,8 @@ dstImage := imaging.Blur(srcImage, 0.5)
 
 Sigma parameter allows to control the strength of the blurring effect.
 
-Original image                     | Sigma = 0.5                            | Sigma = 1.5
------------------------------------|----------------------------------------|---------------------------------------
+Original image | Sigma = 0.5 | Sigma = 1.5
+---------------|------------ |------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_blur_0.5.png) | ![dstImage](testdata/out_blur_1.5.png)
 
 ### Sharpening
@@ -85,8 +80,8 @@ dstImage := imaging.Sharpen(srcImage, 0.5)
 
 `Sharpen` uses gaussian function internally. Sigma parameter allows to control the strength of the sharpening effect.
 
-Original image                     | Sigma = 0.5                               | Sigma = 1.5
------------------------------------|-------------------------------------------|------------------------------------------
+Original image | Sigma = 0.5 | Sigma = 1.5
+---------------|-------------|------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_sharpen_0.5.png) | ![dstImage](testdata/out_sharpen_1.5.png)
 
 ### Gamma correction
@@ -95,8 +90,8 @@ Original image                     | Sigma = 0.5                               |
 dstImage := imaging.AdjustGamma(srcImage, 0.75)
 ```
 
-Original image                     | Gamma = 0.75                             | Gamma = 1.25
------------------------------------|------------------------------------------|-----------------------------------------
+Original image | Gamma = 0.75 | Gamma = 1.25
+---------------|--------------|-------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_gamma_0.75.png) | ![dstImage](testdata/out_gamma_1.25.png)
 
 ### Contrast adjustment
@@ -105,8 +100,8 @@ Original image                     | Gamma = 0.75                             | 
 dstImage := imaging.AdjustContrast(srcImage, 20)
 ```
 
-Original image                     | Contrast = 15                              | Contrast = -15
------------------------------------|--------------------------------------------|-------------------------------------------
+Original image | Contrast = 15 | Contrast = -15
+---------------|---------------|---------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_contrast_p15.png) | ![dstImage](testdata/out_contrast_m15.png)
 
 ### Brightness adjustment
@@ -115,8 +110,8 @@ Original image                     | Contrast = 15                              
 dstImage := imaging.AdjustBrightness(srcImage, 20)
 ```
 
-Original image                     | Brightness = 10                              | Brightness = -10
------------------------------------|----------------------------------------------|---------------------------------------------
+Original image | Brightness = 10 | Brightness = -10
+---------------|-----------------|-----------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_brightness_p10.png) | ![dstImage](testdata/out_brightness_m10.png)
 
 ### Saturation adjustment
@@ -125,8 +120,8 @@ Original image                     | Brightness = 10                            
 dstImage := imaging.AdjustSaturation(srcImage, 20)
 ```
 
-Original image                     | Saturation = 30                              | Saturation = -30
------------------------------------|----------------------------------------------|---------------------------------------------
+Original image | Saturation = 30 | Saturation = -30
+---------------|-----------------|-----------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_saturation_p30.png) | ![dstImage](testdata/out_saturation_m30.png)
 
 ### Hue adjustment
@@ -139,9 +134,9 @@ Original image                     | Hue = 60                                   
 -----------------------------------|----------------------------------------------|---------------------------------------------
 ![srcImage](testdata/flowers_small.png) | ![dstImage](testdata/out_hue_p60.png) | ![dstImage](testdata/out_hue_m60.png)
 
-## FAQ
+### FAQ
 
-### Incorrect image orientation after processing (e.g. an image appears rotated after resizing)
+#### Incorrect image orientation after processing (e.g. an image appears rotated after resizing)
 
 Most probably, the given image contains the EXIF orientation tag.
 The standard `image/*` packages do not support loading and saving
@@ -154,21 +149,7 @@ orientation tag (if present). Here's the example:
 img, err := imaging.Open("test.jpg", imaging.AutoOrientation(true))
 ```
 
-### What's the difference between `imaging` and `gift` packages?
-
-[imaging](https://github.com/disintegration/imaging)
-is designed to be a lightweight and simple image manipulation package.
-It provides basic image processing functions and a few helper functions
-such as `Open` and `Save`. It consistently returns *image.NRGBA image 
-type (8 bits per channel, RGBA).
-
-[gift](https://github.com/disintegration/gift)
-supports more advanced image processing, for example, sRGB/Linear color
-space conversions. It also supports different output image types
-(e.g. 16 bits per channel) and provides easy-to-use API for chaining
-multiple processing steps together.
-
-## Example code
+### Usage example
 
 ```go
 package main
@@ -178,7 +159,7 @@ import (
 	"image/color"
 	"log"
 
-	"github.com/disintegration/imaging"
+	"github.com/essentialkaos/imaging"
 )
 
 func main() {
@@ -234,3 +215,7 @@ func main() {
 Output:
 
 ![dstImage](testdata/out_example.jpg)
+
+### License
+
+[MIT Licence](LICENSE)

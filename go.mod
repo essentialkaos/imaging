@@ -1,3 +1,5 @@
-module github.com/disintegration/imaging
+module github.com/essentialkaos/imaging
 
-require golang.org/x/image v0.0.0-20191009234506-e7c1f5e7dbb8
+go 1.22.8
+
+require golang.org/x/image v0.21.0
