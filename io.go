@@ -15,6 +15,7 @@ import (
 
 	"golang.org/x/image/bmp"
 	"golang.org/x/image/tiff"
+	_ "golang.org/x/image/webp"
 )
 
 type fileSystem interface {
@@ -109,6 +110,7 @@ const (
 	GIF
 	TIFF
 	BMP
+	WEBP
 )
 
 var formatExts = map[string]Format{
@@ -119,6 +121,7 @@ var formatExts = map[string]Format{
 	"tif":  TIFF,
 	"tiff": TIFF,
 	"bmp":  BMP,
+	"webp": WEBP,
 }
 
 var formatNames = map[Format]string{
@@ -127,6 +130,7 @@ var formatNames = map[Format]string{
 	GIF:  "GIF",
 	TIFF: "TIFF",
 	BMP:  "BMP",
+	WEBP: "WEBP",
 }
 
 func (f Format) String() string {
